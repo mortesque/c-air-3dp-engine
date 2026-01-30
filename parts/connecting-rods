@@ -1,0 +1,40 @@
+module circlecut(od,id){
+$fn=128;
+ difference(){
+  circle(od/2);
+  circle(id/2);
+ }   
+}
+module linecut(od,id){
+ difference(){
+  circlecut(od,id);
+  translate([0,-od/2,0])
+  square(od,center=false);
+ }
+}
+
+module connectrods(pwp,psc,crb,crc,stk,crs,wdth,msize){
+$fn=64;
+ difference(){
+  linear_extrude(wdth){    
+   linecut(crc,crb);
+   translate([-crb/2-stk/2,0])
+   square([stk,crs],center=true);
+   translate([-crb/2-stk-pwp/2,0])
+   circlecut(psc,pwp);
+   difference(){
+    translate([-(crc-crb)/4,0,0])
+    square([(crc-crb)/2,((msize*3)*2)+crc],center=true);
+    translate([-(crc-crb)/2,0,0])
+    square([crc-crb,crb],center=true);
+   }
+  }
+  translate([-(crc-crb)/4,(crc/2+msize)+(msize/2),wdth/2])
+  rotate(a=[0,90,0])
+  cylinder(h=(crc-crb)/2,r=msize/2,center=true);
+  translate([-(crc-crb)/4,-(crc/2+msize)-(msize/2),wdth/2])
+  rotate(a=[0,90,0])
+  cylinder(h=(crc-crb)/2,r=msize/2,center=true);
+ }
+}
+//the hunger is real
