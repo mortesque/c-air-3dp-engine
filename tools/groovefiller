@@ -18,6 +18,7 @@ module groovefiller(h,or,ir){
 conecuts(h,or,ir);
 rotate(a=[0,0,45])
 conecuts(h,or,ir);
+//8x more if you need it
 //rotate(a=[0,0,22.5])
 //conecuts(h,or,ir);
 //rotate(a=[0,0,67.5])
