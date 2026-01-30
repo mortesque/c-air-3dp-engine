@@ -1,26 +1,26 @@
 module conecut(h,snd){
-$fn=64;
-cylinder(h=h/2,r1=snd/2,r2=snd*1.5/2);
-translate([0,0,h/2])
-cylinder(h=h/2,r1=snd*1.5/2,r2=snd/2);
+ $fn=64;
+ cylinder(h=h/2,r1=snd/2,r2=snd*1.5/2);
+ translate([0,0,h/2])
+ cylinder(h=h/2,r1=snd*1.5/2,r2=snd/2);
 }
 module conecuts(h,or,ir){
-translate([(or-((or-ir)/2)),0,0])
-conecut(h,or-ir);
-translate([0,(or-((or-ir)/2)),0])
-conecut(h,or-ir);
-translate([-(or-((or-ir)/2)),0,0])
-conecut(h,or-ir);
-translate([0,-(or-((or-ir)/2)),0])
-conecut(h,or-ir);
+ translate([(or-((or-ir)/2)),0,0])
+ conecut(h,or-ir);
+ translate([0,(or-((or-ir)/2)),0])
+ conecut(h,or-ir);
+ translate([-(or-((or-ir)/2)),0,0])
+ conecut(h,or-ir);
+ translate([0,-(or-((or-ir)/2)),0])
+ conecut(h,or-ir);
 }
 module groovefiller(h,or,ir){
-conecuts(h,or,ir);
-rotate(a=[0,0,45])
-conecuts(h,or,ir);
+ conecuts(h,or,ir);
+ rotate(a=[0,0,45])
+ conecuts(h,or,ir);
 //8x more if you need it
-//rotate(a=[0,0,22.5])
-//conecuts(h,or,ir);
-//rotate(a=[0,0,67.5])
-//conecuts(h,or,ir);
+ //rotate(a=[0,0,22.5])
+ //conecuts(h,or,ir);
+ //rotate(a=[0,0,67.5])
+ //conecuts(h,or,ir);
 }
