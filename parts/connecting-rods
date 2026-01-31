@@ -13,7 +13,7 @@ module linecut(od,id){
  }
 }
 
-module connectrods(pwp,psc,crb,crc,stk,crs,wdth,msize){
+module conrod(pwp,psc,crb,crc,stk,crs,wdth,msize){
 $fn=64;
  difference(){
   linear_extrude(wdth){    
