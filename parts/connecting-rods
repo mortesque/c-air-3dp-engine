@@ -37,3 +37,23 @@ $fn=64;
   cylinder(h=(crc-crb)/2,r=msize/2,center=true);
  }
 }
+module conrodcaps(crb,crc,wdth,msize){
+ $fn=64;
+ difference(){
+  linear_extrude(wdth){    
+   linecut(crc,crb);
+   difference(){
+    translate([-(crc-crb)/4,0,0])
+    square([(crc-crb)/2,((msize*3)*2)+crc],center=true);
+    translate([-(crc-crb)/2,0,0])
+    square([crc-crb,crb],center=true);
+   }
+  }
+  translate([-(crc-crb)/4,(crc/2+msize)+(msize/2),wdth/2])
+  rotate(a=[0,90,0])
+  cylinder(h=(crc-crb)/2,r=msize/2,center=true);
+  translate([-(crc-crb)/4,-(crc/2+msize)-(msize/2),wdth/2])
+  rotate(a=[0,90,0])
+  cylinder(h=(crc-crb)/2,r=msize/2,center=true);
+}
+}
