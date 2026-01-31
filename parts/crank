@@ -1,0 +1,25 @@
+module crank(wdth,stk,od,crp,mshd,st){
+$fn=64;
+ difference(){
+  difference(){
+   linear_extrude(wdth){ 
+    difference(){
+     difference(){
+      hull(){
+       circle(od/2);
+       translate([stk,0,0])
+       circle(od/2);
+      }
+      translate([stk,0,0])
+      square(crp,center=true);  
+     }
+     square(crp,center=true);
+    }
+   }
+   translate([0,0,st])
+   cylinder(r=mshd,h=wdth);
+  }
+  translate([stk,0,-st])
+  cylinder(r=mshd,h=wdth);
+ }
+}
