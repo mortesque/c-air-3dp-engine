@@ -1,20 +1,14 @@
-module crnky(crp,od,msize,h){
+include <BOSL2/std.scad>
+include <BOSL2/gears.scad>
+module crnky(crp,od,msize,h,ts,nt,a){
 $fn=64;
  translate([0,0,crp/2])
- difference(){
-  cube(crp,center=true);
-  translate([0,0,-crp/2])
-  cylinder(h=crp,r=msize/2);   
- }
+ spur_gear(circ_pitch=ts, teeth=nt, thickness=crp, pressure_angle=a, shaft_diam=msize);
  translate([0,0,crp])
  difference(){
   cylinder(h=h-(crp*2),r=od/2);
   cylinder(h=h-(crp*2),r=msize/2);   
  }
  translate([0,0,crp/2+(h-(crp*2))+crp])
- difference(){
-  cube(crp,center=true);
-  translate([0,0,-crp/2])
-  cylinder(h=crp,r=msize/2);   
- } 
+ spur_gear(circ_pitch=ts, teeth=nt, thickness=crp, pressure_angle=a, shaft_diam=msize);
 }
