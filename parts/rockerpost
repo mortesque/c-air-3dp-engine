@@ -1,0 +1,47 @@
+module stdcut(ns,nh,nd,mstd,mstdl,stdcof){
+ $fn=64;
+ //screw
+ translate([0,0,mstdl/2])
+ cylinder(h=mstdl,r=mstd/2,center=true);
+  //has been nut
+ translate([0,0,(mstdl-nh)+nh/2])
+ cube([ns,nd,nh],center=true);
+  //screw stud 
+ translate([-stdcof,0,mstdl/2])
+ cylinder(h=mstdl,r=mstd/2,center=true);
+ //curently is nut  
+ translate([-stdcof,0,(mstdl-nh)+nh/2])
+ cube([ns,nd,nh],center=true);\
+  //screw stud   
+ translate([stdcof,0,mstdl/2])   
+ cylinder(h=mstdl,r=mstd/2,center=true);
+ //always will be nut
+ translate([stdcof,0,(mstdl-nh)+nh/2])
+ cube([ns,nd,nh],center=true);   
+}
+module rkrshftpst(l,w,h,mstd,mstdl,ns,nh,bs,bth,rkrs,rkrd,stdoof){
+$fn=64;
+ difference(){
+  difference(){
+   difference(){
+    difference(){
+     //base block
+     translate([0,0,h/2])
+     cube([l,w,h],center=true);
+     //studs whata stud
+     stdcut(ns,nh,w,mstd,mstdl,l/2-mstd/2-stdoof);
+    }
+   //bearing hole the same hole in my soul
+   translate([0,0,((h-bs)+bs/2)-stdoof])
+   rotate(a=[0,90,0])
+   cylinder(h=l,r=bs/2,center=true);
+   }
+   //rockercut
+   translate([rkrs/2+bth,0,(h-rkrd)+rkrd/2])
+   cube([rkrs,w,rkrd],center=true);
+  }
+  //rockercut
+  translate([-rkrs/2-bth,0,(h-rkrd)+rkrd/2])
+  cube([rkrs,w,rkrd],center=true);
+ }
+}
