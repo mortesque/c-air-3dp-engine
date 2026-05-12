@@ -1,0 +1,21 @@
+module stdcut(ns,nh,nd,mstd,mstdl,stdcof){
+ $fn=64;
+ //screw
+ translate([0,0,mstdl/2])
+ cylinder(h=mstdl,r=mstd/2,center=true);
+ //nut
+ translate([0,0,(mstdl-nh)+nh/2])
+ cube([ns,nd,nh],center=true);
+ //stud 
+ translate([-stdcof,0,mstdl/2])
+ cylinder(h=mstdl,r=mstd/2,center=true);
+ //nut  
+ translate([-stdcof,0,(mstdl-nh)+nh/2])
+ cube([ns,nd,nh],center=true);\
+  //stud   
+ translate([stdcof,0,mstdl/2])   
+ cylinder(h=mstdl,r=mstd/2,center=true);
+ //nut
+ translate([stdcof,0,(mstdl-nh)+nh/2])
+ cube([ns,nd,nh],center=true);   
+}
