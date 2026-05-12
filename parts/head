@@ -1,0 +1,55 @@
+module vlvcut(bth,stmh,vbh,msize,stmb,vb,ps,pw){
+ $fn=64;
+ //screw hole bottomless hole
+ translate([0,0,bth/2])
+ cylinder(h=bth,r=msize/2,center=true);
+ //stem   
+ translate([0,0,stmh/2+bth])   
+ cylinder(h=stmh,r=stmb/2,center=true);
+ //valve   
+ translate([0,0,stmh+bth+vbh/2])   
+ cylinder(h=vbh,r1=stmb/2,r2=vb/2,center=true);
+ //port
+ rotate(a=[0,90,0])
+ translate([(-bth-stmh-vbh)/1.8,0,pw/4])
+ cylinder(h=pw/2,r=ps/2,center=true);   
+}
+
+module head(bth,stmh,vbh,msize,stmb,vb,ps,hgod,hgid,l,w,pcof){
+ $fn=64;
+ difference(){    
+  difference(){
+   difference(){
+    //block
+    translate([0,0,(bth+stmh+vbh)/2])
+    cube([w,l,bth+stmh+vbh],center=true);
+    //valve 0
+    translate([0,pcof,0])   
+    vlvcut(bth,stmh,vbh,msize,stmb,vb,ps,w);   
+   }
+   //valve 1
+   translate([0,-pcof,0])
+   vlvcut(bth,stmh,vbh,msize,stmb,vb,ps,w);
+  }
+  //headgasket, hopefully it holds my stress
+  translate([0,0,(0.5+bth+stmh+vbh)-1])
+  difference(){
+   cylinder(h=1,r=hgod/2,center=true);
+   cylinder(h=1,r=hgid/2,center=true);
+  }
+ }
+ //manifold 0
+ rotate(a=[0,90,0])
+ translate([(-bth-stmh-vbh)/1.8,pcof,w/2])
+ difference(){
+  cylinder(h=w/2,r=ps/2*1.9,center=true);
+  cylinder(h=w/2,r=ps/2,center=true);
+ }
+ //manifold 1
+ rotate(a=[0,90,0])
+ translate([(-bth-stmh-vbh)/1.8,-pcof,w/2])
+ difference(){
+  cylinder(h=w/2,r=ps/2*1.9,center=true);
+  cylinder(h=w/2,r=ps/2,center=true);
+ }
+}
