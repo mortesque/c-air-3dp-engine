@@ -1,0 +1,27 @@
+module valvestem(vb,vbh,stmh,stmb,orgid,orgod,orh,orzof,msize,mshh,mshs){
+ $fn=64;
+ difference(){
+  difference(){
+   difference(){
+    //valve shape
+    cylinder(h=vbh,r1=vb/2,r2=stmb/2);
+    //screw hole(deep hole of despair)
+    cylinder(h=vbh,r=msize/2);
+   }
+    //oring well(well well well)
+   translate([0,0,orzof])
+   difference(){
+    cylinder(h=orh,r=orgod/2);
+    cylinder(h=orh,r=orgid/2);  
+   }
+  }
+  //screw head recess
+  cylinder(h=mshh,r=mshs/2);
+ }
+ //stem
+ translate([0,0,vbh])
+ difference(){
+  cylinder(h=stmh,r=stmb/2);
+  cylinder(h=stmh,r=msize/2);
+ }
+}
