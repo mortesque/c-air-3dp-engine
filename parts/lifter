@@ -1,0 +1,33 @@
+module lftr(ps,pof,bs,bh,lftrs,h,ccof){
+ $fn=64;
+ difference(){
+  difference(){
+   difference(){
+    difference(){
+     difference(){
+      //base cylinder  
+      translate([0,0,h/2])
+      cylinder(h=h,r=lftrs/2,center=true);
+      //pin hole
+      translate([0,0,ps/2+pof])
+      rotate([0,90,0])
+      cylinder(h=lftrs,r=ps/2,center=true);
+     }
+     //roller bearing
+     translate([0,0,ps/2+pof])
+     rotate([0,90,0])
+     cylinder(h=bh,r=bs/2,center=true);
+    }
+    //cube cut
+    translate([lftrs-ccof,0,h/2])
+    cube([lftrs,lftrs,h],center=true);
+   }
+   //cube cut
+   translate([-lftrs+ccof,0,h/2])
+   cube([lftrs,lftrs,h],center=true);
+  }
+  //cut the slopies
+  translate([0,0,bs/4])
+  cube([bh,lftrs,bs/2],center=true);
+ }
+}
